@@ -37,22 +37,29 @@ async function main(){
     "https://apod.nasa.gov/apod/image/2007/N6188_Cappelletti_4508.jpg",
     "https://apod.nasa.gov/apod/image/2003/Dolphin_Pleiades_3495.jpg"];
     change_bg(url_array[url_i]);
-    setInterval(function(){
+	url_i++;
+	let my_timer = setInterval(function(){
         if(url_i==url_array.length) url_i = 0;
         change_bg(url_array[url_i]);
         console.log(`we are on -> ${url_i}`)
         url_i++;
     }, 10000);
+	return my_timer;
     
 
 }
 module.exports = class VarietyMimic {
     old_bg = "https://files.wallpaperpass.com/2019/10/outer%20space%20wallpaper%20028%20-%201920x1080.jpg";
+	interval;
     start () {
-        main();
+       main().then((interval)=>{
+			this.interval = interval;
+	   });
+	   //console.log(this.interval);
     }
     stop () {
-        console.log(this.old_bg);
+		clearInterval(this.interval);
+        change_bg(this.old_bg);
     }
 
  
