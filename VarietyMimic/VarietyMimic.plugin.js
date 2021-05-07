@@ -25,8 +25,7 @@ async function get_jq() {
     document.getElementsByTagName('head')[0].appendChild(jq);
 }
 async function main(){
-    if(window.jQuery) console.log("jquery is loaded");
-    else {
+    if(!window.jQuery) {
         document.onload = await get_jq();
         window.$ = window.jQuery;
     }
@@ -54,11 +53,11 @@ module.exports = class VarietyMimic {
     start () {
        main().then((interval)=>{
 		this.interval = interval;
-	   });
+	});
 	   //console.log(this.interval);
     }
     stop () {
-		clearInterval(this.interval);
+	clearInterval(this.interval);
         change_bg(this.old_bg);
     }
 
