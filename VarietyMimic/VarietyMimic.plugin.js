@@ -53,7 +53,7 @@ module.exports = class VarietyMimic {
 	interval;
     start () {
        main().then((interval)=>{
-			this.interval = interval;
+		this.interval = interval;
 	   });
 	   //console.log(this.interval);
     }
